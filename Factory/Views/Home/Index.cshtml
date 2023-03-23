@@ -4,31 +4,99 @@
 
 @using Factory.Models;
 
-<h1>Welcome to the Factory Tracker!</h1>
+<h1>Factory Tracker</h1>
 <hr>
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <h4>Engineers <span><a href="/Engineers"><button type="button" class="btn btn-light btn-sm">Manage</button></a>
+        </span></h4>
+      @if (Model["engineers"].Length == 0)
+      {
+        <p>No engineers have been added yet!</p>
+      }
+      else
+      {
+        <table>
+        <tr>
+          <th>Engineer</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+        @foreach (Engineer engineer in Model["engineers"])
+          {
+            {
+              <tr>
+                <td>
+                  @Html.ActionLink($"{engineer.Name}", "Details", new { id = engineer.EngineerId })
+                </td>
+                <td>
+                  @if (engineer.isBusy == false)
+                  {
+                    <div class="idle">Idle</div>
+                  }
+                  else
+                  {
+                    <div class="busy">Busy</div>
+                  }
+                </td>
+                <td>
+                  @Html.ActionLink("Edit", "Edit", "Engineers",new { id = engineer.EngineerId }, new {@class = "btn btn-warning"})
+                  @Html.ActionLink("Delete", "Delete", "Engineers", new { id = engineer.EngineerId }, new {@class = "btn btn-danger"})
+                </td>
+              </tr>
+            }
+          }
+        </table>
+      }
+    </div>
+    <div class="col-sm">
+      <h4>Machines <span><a href="/Machines"><button type="button" class="btn btn-light btn-sm">Manage</button></a>
+        </span></h4>
+      @if (Model["machines"].Length == 0)
+      {
+        <p>No machines have been added yet!</p>
+      }
+      else 
+      {
+          <table>
+        <tr>
+          <th>Machine</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+        @foreach (Machine machine in Model["machines"])
+        {
+          <tr>
+              <td>
+                @Html.ActionLink($"{machine.Title}", "Details", new { id = machine.MachineId })
+              </td>
+              <td>
+                @if (machine.Status == 0)
+                {
+                  <div class="idle">Operational</div>
+                }
+                else if (machine.Status == 2)
+                {
+                  <div class="caution">Under Repair</div>
+                }
+                else
+                {
+                  <div class="busy">Malfunctioning</div>
+                }
+              </td>
+              <td>
+                @Html.ActionLink("Edit", "Edit", "Machines", new { id = machine.MachineId }, new {@class = "btn btn-warning"})
+                @Html.ActionLink("Delete", "Delete", "Machines", new { id = machine.MachineId }, new {@class = "btn btn-danger"})
+              </td>
+            </tr>
+        }
+        </table>
+      }
 
-<h4>Engineers <span><a href="/Engineers"><button type="button" class="btn btn-light btn-sm">Manage</button></a>
-  </span></h4>
-@if (Model["engineers"].Length == 0)
-{
-  <p>No engineers have been added yet!</p>
-}
-<ul>
-  @foreach (Engineer engineer in Model["engineers"])
-  {
-    <li>@Html.ActionLink(@engineer.Name, "Details", "Engineers", new { id = @engineer.EngineerId})</li>
-  }
-</ul>
+    </div>
+  </div>
+</div>
 
-<h4>Machines <span><a href="/Machines"><button type="button" class="btn btn-light btn-sm">Manage</button></a>
-  </span></h4>
-@if (Model["machines"].Length == 0)
-{
-  <p>No machines have been added yet!</p>
-}
-<ul>
-  @foreach (Machine machine in Model["machines"])
-  {
-    <li>@Html.ActionLink(@machine.Title, "Details", "Machines", new { id = @machine.MachineId})</li>
-  }
-</ul>
+
+
