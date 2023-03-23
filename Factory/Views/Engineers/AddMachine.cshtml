@@ -6,16 +6,22 @@
 
 <h2>Add a machine</h2>
 
-<h4>Assign a machine to this engineer: @Html.DisplayFor(model => model.Name)</h4>
-
-@using (Html.BeginForm())
+@if (ViewBag.MachineCount == 0)
 {
-  @Html.HiddenFor(model => model.EngineerId)
-
-  @Html.Label("Select machine")
-  @Html.DropDownList("MachineId")
-
-  <input type="submit" value="Save" />
+  <h4>You have not added any machines yet! Please add them <span>@Html.ActionLink("here", "Index", "Machines")</span>
+</h4>
 }
+else
+{
+  <h4>Assign a machine to this engineer: @Html.DisplayFor(model => model.Name)</h4>
+  @using (Html.BeginForm())
+  {
+    @Html.HiddenFor(model => model.EngineerId)
 
+    @Html.Label("Select machine")
+    @Html.DropDownList("MachineId")
+
+    <input type="submit" value="Save" />
+  }
+}
 <p>@Html.ActionLink("Back to list", "Index")</p>

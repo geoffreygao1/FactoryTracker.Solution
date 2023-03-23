@@ -7,15 +7,22 @@
 <h2>Add an Engineer</h2>
 
 <h4>Assign an engineer to this machine: @Html.DisplayFor(model => model.Title)</h4>
-
-@using (Html.BeginForm())
+@if (ViewBag.EngineerCount == 0)
 {
-  @Html.HiddenFor(model => model.MachineId)
+  <p>You have not added any engineers yet! Please add them <span>@Html.ActionLink("here", "Index", "Engineers")</span>
+</p>
+}
+else
+{
+  @using (Html.BeginForm())
+  {
+    @Html.HiddenFor(model => model.MachineId)
 
-  @Html.Label("Select item")
-  @Html.DropDownList("EngineerId")
+    @Html.Label("Select item")
+    @Html.DropDownList("EngineerId")
 
-  <input type="submit" value="Save" />
+    <input type="submit" value="Save" />
+  }
 }
 
 <p>@Html.ActionLink("Back to list", "Index")</p>
