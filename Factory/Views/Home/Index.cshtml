@@ -7,7 +7,8 @@
 <h1>Welcome to the Factory Tracker!</h1>
 <hr>
 
-<h4>Engineers</h4>
+<h4>Engineers <span><a href="/Engineers"><button type="button" class="btn btn-light btn-sm">Manage</button></a>
+  </span></h4>
 @if (Model["engineers"].Length == 0)
 {
   <p>No engineers have been added yet!</p>
@@ -19,7 +20,8 @@
   }
 </ul>
 
-<h4>Machines</h4>
+<h4>Machines <span><a href="/Machines"><button type="button" class="btn btn-light btn-sm">Manage</button></a>
+  </span></h4>
 @if (Model["machines"].Length == 0)
 {
   <p>No machines have been added yet!</p>
