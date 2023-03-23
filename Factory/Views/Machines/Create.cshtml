@@ -5,15 +5,13 @@
 @model Factory.Models.Machine
 
 <h4>Add a new machine</h4>
-<p>@Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger", @style = "font-weight: 600;"
-  })</p>
+<p>@Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger", @style = "font-weight: 600;"})</p>
 @using (Html.BeginForm())
 {
   @Html.LabelFor(model => model.Title)
   @Html.TextBoxFor(model => model.Title)
 
-  <input type="submit" value="Add new machine" class="btn btn-primary" />
+  <input type="submit" value="Add new machine" />
 }
-<p>@Html.ActionLink("Add new machine", "Create")</p>
 <p>@Html.ActionLink("Back to List", "Index")</p>
 
