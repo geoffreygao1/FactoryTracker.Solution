@@ -27,7 +27,7 @@ _This application contains a website that allows a user to track engineers and m
   }
 }
 ```
-* _Create the database using the migrations in the To Do List project. Open your shell (e.g., Terminal or GitBash) to the production directory "Factory", and run `dotnet ef database update`._ 
+* _Create the database using the migrations in the Factory project. Open your shell (e.g., Terminal or GitBash) to the production directory "Factory", and run `dotnet ef database update`._ 
 * _In the terminal, run the program with `dotnet watch run` to start the project in development mode with a watcher_
 * _If the application does not automatically launch, open the browser to [https://localhost:5001](https://localhost:5001)_
 
