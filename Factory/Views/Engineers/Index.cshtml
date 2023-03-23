@@ -12,13 +12,37 @@
 }
 else
 {
-  <ul>
+  <table>
+  <tr>
+    <th>Name</th>
+    <th>Status</th>
+    <th>Actions</th>
+  </tr>
   @foreach (Engineer engineer in Model)
     {
-      <li>@Html.ActionLink($"{engineer.Name}", "Details", new { id = engineer.EngineerId })
-      </li>
+      <tr>
+        <td>
+          @Html.ActionLink($"{engineer.Name}", "Details", new { id = engineer.EngineerId })
+        </td>
+        <td>
+          @if (engineer.isBusy == false)
+          {
+            <div class="idle">Idle</div>
+          }
+          else
+          {
+            <div class="busy">Busy</div>
+          }
+        </td>
+        <td>
+          @Html.ActionLink("Edit", "Edit", new { id = engineer.EngineerId })
+          @Html.ActionLink("Delete", "Delete", new { id = engineer.EngineerId })
+        </td>
+      </tr>
+      @* <li>@Html.ActionLink($"{engineer.Name}", "Details", new { id = engineer.EngineerId })
+  </li> *@
     }
-  </ul>
+  </table>
 }
 
 <p>@Html.ActionLink("Add new engineer", "Create")</p>

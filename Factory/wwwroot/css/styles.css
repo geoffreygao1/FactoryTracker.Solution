@@ -1,0 +1,29 @@
+table {
+  width: 80%;
+  text-align: center;
+}
+
+th,
+td {
+  border: 1px solid darkgray;
+  padding: 5px;
+}
+
+th {
+  background-color: lightgray;
+  ;
+}
+
+tr:hover {
+  background-color: lightgray;
+}
+
+.busy {
+  color: red;
+  background-color: pink;
+}
+
+.idle {
+  color: darkgreen;
+  background-color: lightgreen;
+}
