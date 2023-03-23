@@ -5,19 +5,24 @@
 @model Factory.Models.Engineer
 
 <h4>Add a new engineer</h4>
+<hr>
 <p>@Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger", @style = "font-weight: 600;"})</p>
 @using (Html.BeginForm())
 {
+  <div>
   @Html.LabelFor(model => model.Name)
   @Html.TextBoxFor(model => model.Name)
-
+</div>
+  <div>
   <label for="isBusy">Current Status:</label>
   <select name="isBusy" id="isBusy">
-  <option value=false>Idle</option>
-  <option value=true>Busy</option>
-</select>
+    <option value=false>Idle</option>
+    <option value=true>Busy</option>
+  </select>
+</div>
 
-
-  <input type="submit" value="Add new engineer" />
+  <br>
+  <input type="submit" value="Add new engineer" class="btn btn-success" />
 }
-<p>@Html.ActionLink("Back to List", "Index")</p>
+<hr>
+<a href="/Engineers"><button type="button" class="btn btn-primary btn-sm">Back to List</button></a>
