@@ -15,7 +15,7 @@
 }
 else
 {
-  <h4>This engineer has been assigned to the followign machines:</h4>
+  <h4>This engineer has been assigned to the following machines:</h4>
   <ul>
   @foreach (EngineerMachine join in Model.JoinEntities)
     {
@@ -23,6 +23,7 @@ else
       @using (Html.BeginForm("DeleteJoin", "Engineers"))
       {
         @Html.Hidden("joinId", @join.EngineerMachineId)
+        @Html.Hidden("engineerId", Model.EngineerId)
         <input type="submit" value="Delete" />
       }
     }
