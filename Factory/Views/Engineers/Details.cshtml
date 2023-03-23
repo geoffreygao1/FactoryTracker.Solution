@@ -8,6 +8,14 @@
 <h2>Engineer Details</h2>
 <hr />
 <h3>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)</h3>
+@if (Model.isBusy == false)
+{
+  <h4>Current Status: Idle</h4>
+}
+else if (Model.isBusy == true)
+{
+  <h4>Current Status: Busy</h4>
+}
 
 @if (@Model.JoinEntities.Count == 0)
 {

@@ -15,6 +15,12 @@
   @Html.LabelFor(model => model.Name)
   @Html.EditorFor(model => model.Name)
 
+  <label for="isBusy">Current Status:</label>
+  <select name="isBusy" id="isBusy">
+  <option value=false>Idle</option>
+  <option value=true>Busy</option>
+</select>
+
   <input type="submit" value="Save" />
 }
 <p>@Html.ActionLink("Back to list", "Index")</p>

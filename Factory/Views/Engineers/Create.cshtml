@@ -11,6 +11,13 @@
   @Html.LabelFor(model => model.Name)
   @Html.TextBoxFor(model => model.Name)
 
+  <label for="isBusy">Current Status:</label>
+  <select name="isBusy" id="isBusy">
+  <option value=false>Idle</option>
+  <option value=true>Busy</option>
+</select>
+
+
   <input type="submit" value="Add new engineer" />
 }
 <p>@Html.ActionLink("Back to List", "Index")</p>
