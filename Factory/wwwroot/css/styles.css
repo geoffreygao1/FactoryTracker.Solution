@@ -27,3 +27,8 @@ tr:hover {
   color: darkgreen;
   background-color: lightgreen;
 }
+
+.caution {
+  color: brown;
+  background-color: yellow;
+}
