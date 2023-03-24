@@ -5,18 +5,18 @@
 @using Factory.Models
 @model Factory.Models.Machine
 
-<h3>Machine: @Html.DisplayFor(model => model.Title)</h3>
+<h3>@Html.DisplayFor(model => model.Title)</h3>
 @if (Model.Status == 0)
 {
-  <h4>Current Status: Operational</h4>
+  <h5>Current Status: <span class="idle">Operational</span></h5>
 }
 else if (Model.Status == 1)
 {
-  <h4>Current Status: Malfunctioning</h4>
+  <h5>Current Status: <span class="busy">Malfunctioning</span></h5>
 }
 else
 {
-  <h4>Current Status: Being Repaired</h4>
+  <h5>Current Status:<span class="caution">Being Repaired</span></h5>
 }
 
 @if (@Model.JoinEntities.Count == 0)
