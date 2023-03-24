@@ -5,9 +5,7 @@
 @using Factory.Models
 @model Factory.Models.Machine
 
-<h2>Machines Details</h2>
-<hr />
-<h3>@Html.DisplayNameFor(model => model.Title): @Html.DisplayFor(model => model.Title)</h3>
+<h3>Machine: @Html.DisplayFor(model => model.Title)</h3>
 @if (Model.Status == 0)
 {
   <h4>Current Status: Operational</h4>
@@ -27,24 +25,45 @@ else
 }
 else
 {
-  <h4>Engineers the machine is assigned to:</h4>
-  <ul>
+  <h5>Assigned Engineers:</h5>
+  <table>
+  <tr>
+    <th>Name</th>
+    <th>Status</th>
+    <th>Actions</th>
+  </tr>
   @foreach (EngineerMachine join in Model.JoinEntities)
     {
-      <li>@Html.ActionLink(join.Engineer.Name, "Details", "Engineers", new {id = join.Engineer.EngineerId}) </li>
-      @using (Html.BeginForm("DeleteJoin", "Machines"))
-      {
-        @Html.Hidden("joinId", @join.EngineerMachineId)
-        @Html.Hidden("machineId", Model.MachineId)
-        <input type="submit" value="Delete" />
-      }
+      <tr>
+        <td>
+          @Html.ActionLink($"{join.Engineer.Name}", "Details", "Engineers", new { id = join.Engineer.EngineerId })
+        </td>
+        <td>
+          @if (join.Engineer.isBusy == false)
+          {
+            <div class="idle">Idle</div>
+          }
+          else
+          {
+            <div class="busy">Busy</div>
+          }
+        </td>
+        <td>
+          @using (Html.BeginForm("DeleteJoin", "Machines"))
+          {
+            @Html.Hidden("joinId", @join.EngineerMachineId)
+            @Html.Hidden("machineId", Model.MachineId)
+            <input type="submit" value="Delete" class="btn btn-danger" />
+          }
+        </td>
+      </tr>
     }
-  </ul>
+  </table>
+
 }
-
-<p>@Html.ActionLink("Add an Engineer", "AddEngineer", new { id = Model.MachineId })</p>
-<p>@Html.ActionLink("Edit Machine", "Edit", new { id = Model.MachineId })</p>
-<p>@Html.ActionLink("Delete Machine", "Delete", new { id = Model.MachineId })</p>
-<p>@Html.ActionLink("Back to List", "Index")</p>
-
+<hr>
+@Html.ActionLink("Add an Engineer", "AddEngineer", new { id = Model.MachineId }, new {@class = "btn btn-success"})
+@Html.ActionLink("Edit Machine", "Edit", new { id = Model.MachineId}, new {@class = "btn btn-warning"})
+@Html.ActionLink("Delete Machine", "Delete", new { id = Model.MachineId }, new {@class = "btn btn-danger"})
+<a href="/Machines"><button type="button" class="btn btn-primary">Back to List</button></a>
 
