@@ -5,16 +5,15 @@
 @using Factory.Models
 @model Factory.Models.Engineer
 
-<h2>Engineer Details</h2>
-<hr />
-<h3>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)</h3>
+
+<h3>@Html.DisplayFor(model => model.Name)</h3>
 @if (Model.isBusy == false)
 {
-  <h4>Current Status: Idle</h4>
+  <h5>Current Status: <span class="idle">Idle</span></h5>
 }
 else if (Model.isBusy == true)
 {
-  <h4>Current Status: Busy</h4>
+  <h5>Current Status: <span class="busy">Busy</span></h5>
 }
 
 @if (@Model.JoinEntities.Count == 0)
@@ -23,21 +22,50 @@ else if (Model.isBusy == true)
 }
 else
 {
-  <h4>This engineer has been assigned to the following machines:</h4>
-  <ul>
+  <h5>Licensed For:</h5>
+  <table>
+  <tr>
+    <th>Machine</th>
+    <th>Status</th>
+    <th>Actions</th>
+  </tr>
   @foreach (EngineerMachine join in Model.JoinEntities)
     {
-      <li>@Html.ActionLink(join.Machine.Title, "Details", "Machines", new {id = join.Machine.MachineId}) </li>
-      @using (Html.BeginForm("DeleteJoin", "Engineers"))
-      {
-        @Html.Hidden("joinId", @join.EngineerMachineId)
-        @Html.Hidden("engineerId", Model.EngineerId)
-        <input type="submit" value="Delete" />
-      }
-    }
-  </ul>
-}
+      <tr>
+        <td>
+          @Html.ActionLink($"{join.Machine.Title}", "Details", new { id = join.Machine.MachineId })
+        </td>
+        <td>
+          @if (join.Machine.Status == 0)
+          {
+            <div class="idle">Operational</div>
+          }
+          else if (join.Machine.Status == 2)
+          {
+            <div class="caution">Under Repair</div>
+          }
+          else
+          {
+            <div class="busy">Malfunctioning</div>
+          }
+        </td>
+        <td>
+          @using (Html.BeginForm("DeleteJoin", "Engineers"))
+          {
+            @Html.Hidden("joinId", @join.EngineerMachineId)
+            @Html.Hidden("engineerId", Model.EngineerId)
+            <input type="submit" value="Delete" class="btn btn-danger" />
+          }
+        </td>
+      </tr>
 
-<p>@Html.ActionLink("Edit Engineer", "Edit", new { id = Model.EngineerId })</p>
-<p>@Html.ActionLink("Add a machine", "AddMachine", new { id = Model.EngineerId })</p>
-<p>@Html.ActionLink("Delete engineer", "Delete", new { id = Model.EngineerId })</p>
+    }
+  </table>
+
+}
+<br>
+@Html.ActionLink("Add a machine", "AddMachine", new { id = Model.EngineerId }, new {@class = "btn btn-success"})
+@Html.ActionLink("Edit Engineer", "Edit", new { id = Model.EngineerId }, new {@class = "btn btn-warning"})
+@Html.ActionLink("Delete engineer", "Delete", new { id = Model.EngineerId }, new {@class = "btn btn-danger"})
+<a href="/Engineers"><button type="button" class="btn btn-primary">Back to List</button></a>
+
